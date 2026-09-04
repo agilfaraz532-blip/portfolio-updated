@@ -4,10 +4,10 @@ import { Github, Linkedin, Mail, Phone, ArrowDown, ArrowRight } from 'lucide-rea
 
 export const Hero = () => {
   const titles = [
-    'Cyber Security Engineer',
-    'AI & LLM Security Researcher',
-    'Full Stack Developer',
-    'Python Developer',
+    'Python Full Stack Developer',
+    'DevOps & Cloud Computing Trainee',
+    'Django & React Developer',
+    'Cloud-Native Builder',
   ]
 
   const [titleIndex, setTitleIndex] = useState(0)
@@ -87,7 +87,7 @@ export const Hero = () => {
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-accent tracking-wider uppercase mb-6">
             <span className="w-2.5 h-2.5 rounded-full bg-accent animate-ping" />
-            Security Core: Operational
+            Open to Software Developer / Trainee Roles
           </span>
 
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-textPrimary leading-none font-heading">
@@ -99,7 +99,7 @@ export const Hero = () => {
           </h2>
 
           <p className="text-base md:text-lg text-textSecondary/80 max-w-xl mb-8 leading-relaxed font-sans">
-            Specializing in risk assessment, network forensics, AI &amp; LLM safety models, and secure full-stack software development. Designing resilient architectures to shield data from modern threat vectors.
+            Python full-stack developer and DevOps & Cloud Computing trainee. I build secure, scalable web applications with Django, React, REST APIs, AWS, Docker, and modern CI/CD practices.
           </p>
 
           {/* Action Buttons */}
@@ -124,10 +124,10 @@ export const Hero = () => {
 
           {/* Social Grid */}
           <div className="flex items-center gap-5 text-textSecondary">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
+            <a href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
               <Github size={18} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
+            <a href="https://linkedin.com/in/agilfaraz" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
               <Linkedin size={18} />
             </a>
             <a href="mailto:agilfaraz532@gmail.com" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
@@ -158,7 +158,7 @@ export const Hero = () => {
             {/* Profile Card Container */}
             <div className="relative w-full aspect-[4/5] rounded-[30px] overflow-hidden bg-gradient-to-b from-[#0e1630] to-[#080d21] border border-white/10 p-5 shadow-2xl backdrop-blur-xl flex flex-col justify-between">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-[10px] font-mono text-accent tracking-[0.2em] uppercase">SECURE.PORTAL: C2_NODE</span>
+                <span className="text-[10px] font-mono text-accent tracking-[0.2em] uppercase">DEV.PORTFOLIO: CLOUD_READY</span>
                 <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
               </div>
 
@@ -173,7 +173,7 @@ export const Hero = () => {
                 />
 
                 <div className="absolute bottom-3 right-3 bg-[#050816]/90 border border-white/15 px-3 py-1 rounded-lg backdrop-blur-md z-20 text-[10px] font-mono font-bold text-accent">
-                  FARAZ.SEC // C2
+                  AGIL.DEV // 01
                 </div>
               </div>
 
@@ -182,7 +182,7 @@ export const Hero = () => {
                   Agil Faraz
                 </h3>
                 <div className="text-xs font-mono text-textSecondary flex justify-between items-center">
-                  <span>CS &amp; Cyber Security</span>
+                  <span>Python Full Stack</span>
                   <span className="text-accent font-semibold">UCE Thodupuzha</span>
                 </div>
               </div>

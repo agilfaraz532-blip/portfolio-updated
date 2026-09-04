@@ -7,42 +7,27 @@ export const Education = () => {
   const educationList = [
     {
       id: 'e1',
-      date: '2022 - 2026',
+      date: '2022 - May 2026',
       degree: 'Bachelor of Technology (B.Tech)',
       major: 'Computer Science and Cyber Security',
-      school: 'University College of Engineering',
+      school: 'University College Of Engineering',
       location: 'Thodupuzha, Kerala',
       icon: <GraduationCap className="text-accent" size={20} />,
       details: [
-        'Rigorous academic coursework covering Cryptography, Threat Modeling, Network Forensics, Operating Systems, Database Management Systems, and Software Engineering.',
-        'Hands-on lab training in penetration testing, network configuration, and secure application development.',
-        'Key project: Chest Pathology Detection using deep learning ensemble models (ResNet, DenseNet, EfficientNet).'
+        'Coursework and projects across software engineering, databases, computer networks, and secure application development.',
+        'Key project: Chest Pathology Detection using deep learning ensemble models (ResNet-50, DenseNet-121, EfficientNet-B0).'
       ]
     },
     {
       id: 'e2',
-      date: '2020 - 2022',
-      degree: 'Pre-University Education (Higher Secondary)',
-      major: 'Physics, Chemistry, Mathematics, Computer Science',
+      date: 'Pre-University',
+      degree: 'Pre-University & SSLC',
+      major: 'General Academics',
       school: 'Jawahar Navodaya Vidyalaya',
       location: 'Wayanad, Kerala',
       icon: <Landmark className="text-primary" size={20} />,
       details: [
-        'Selected for Navodaya residential scholarship program, focusing on academic rigor and scientific foundations.',
-        'Extensive practical programming in C++ and basic algorithm design.',
-        'Active representation in inter-school science exhibitions and sports tournaments.'
-      ]
-    },
-    {
-      id: 'e3',
-      date: '2015 - 2020',
-      degree: 'Secondary School Leaving Certificate (SSLC)',
-      major: 'General Academics',
-      school: 'Jawahar Navodaya Vidyalaya',
-      location: 'Wayanad, Kerala',
-      icon: <Landmark className="text-secondaryAccent" size={20} />,
-      details: [
-        'Graduated with distinction and strong foundation in math, sciences, and analytical studies.'
+        'Completed pre-university and secondary education at Jawahar Navodaya Vidyalaya, Wayanad.'
       ]
     }
   ]

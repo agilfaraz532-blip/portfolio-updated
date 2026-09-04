@@ -20,10 +20,10 @@ export const Footer = () => {
           {/* Column 1: Branding */}
           <div className="flex flex-col gap-3">
             <span className="font-heading text-2xl font-bold tracking-wider text-textPrimary">
-              faraz<span className="text-accent">.sec</span>
+              agil<span className="text-accent">.dev</span>
             </span>
             <p className="text-xs text-textSecondary leading-relaxed max-w-xs font-sans">
-              Cyber Security Engineer &amp; AI Security Researcher. Designing resilient systems and auditing threat vectors.
+              Python full-stack developer and DevOps &amp; Cloud Computing trainee, building practical, scalable software products.
             </p>
           </div>
 
@@ -50,7 +50,7 @@ export const Footer = () => {
           <div className="flex flex-col gap-4 items-start md:items-end">
             <span className="text-xs font-mono font-bold text-accent uppercase tracking-widest md:text-right w-full">Connect</span>
             <div className="flex items-center gap-3">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 border border-white/5 rounded-full hover:text-accent hover:border-accent/40 transition-all" aria-label="GitHub">
+              <a href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 border border-white/5 rounded-full hover:text-accent hover:border-accent/40 transition-all" aria-label="Agil Faraz on GitHub">
                 <Github size={16} />
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white/5 border border-white/5 rounded-full hover:text-accent hover:border-accent/40 transition-all" aria-label="LinkedIn">
@@ -73,7 +73,7 @@ export const Footer = () => {
             &copy; 2026 Agil Faraz. All rights reserved.
           </span>
           <span className="text-[10px] font-mono text-textSecondary/30">
-            SECURE_PORTAL // VER_1.0
+            AGIL.DEV // VER_2.0
           </span>
         </div>
       </div>

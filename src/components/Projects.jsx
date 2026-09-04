@@ -6,6 +6,7 @@ import SpotlightCard from './SpotlightCard'
 export const Projects = () => {
   const [filter, setFilter] = useState('all')
   const [expandedId, setExpandedId] = useState(null)
+  const githubProfile = 'https://github.com/agilfaraz532-blip'
 
   const projectsList = [
     {
@@ -302,7 +303,7 @@ export const Projects = () => {
                   <div className="flex justify-between items-center w-full">
                     <div className="flex gap-4">
                       <a
-                        href={project.github}
+                        href={githubProfile}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-textSecondary hover:text-accent transition-colors flex items-center gap-1 text-xs font-semibold"

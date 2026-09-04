@@ -1,36 +1,36 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Cpu, ShieldCheck, Eye, Terminal } from 'lucide-react'
+import { Cloud, GitBranch, Server } from 'lucide-react'
 import SpotlightCard from './SpotlightCard'
 
 export const Research = () => {
   const researchItems = [
     {
       id: 'r1',
-      date: '2025 - Present',
-      title: 'Adversarial Prompt Shielding & Jailbreak Heuristics',
-      field: 'LLM Safety & Alignment',
-      role: 'Lead Researcher',
-      icon: <Terminal className="text-accent" size={20} />,
-      abstract: 'Fuzzing alignment guardrails on commercial and open-weights LLMs to categorize semantic vectors of jailbreaks. Engineered vector anomaly scoring algorithms and input regex middleware filtering pipelines to detect prompt manipulation with sub-20ms overhead.'
+      date: 'Present',
+      title: 'DevOps & Cloud Computing Trainee',
+      field: 'Cloud-Native Foundations',
+      role: 'Trainee Engineer',
+      icon: <Cloud className="text-accent" size={20} />,
+      abstract: 'Developing practical deployment skills across AWS cloud fundamentals, Docker containers, Linux, environment configuration, and scalable application delivery.'
     },
     {
       id: 'r2',
-      date: '2024 - 2025',
-      title: 'Explainable AI Decision Boundary Mapping',
-      field: 'Neural Network Interpretability',
-      role: 'Core Developer',
-      icon: <Eye className="text-primary" size={20} />,
-      abstract: 'Investigated gradient activations in convolutional layers of neural networks. Utilized Grad-CAM and LIME algorithms to project heatmaps onto high-dimensional radiology imagery, making AI diagnostic decisions fully explainable and auditable.'
+      date: 'Present',
+      title: 'Continuous Delivery Practice',
+      field: 'Automation & Reliability',
+      role: 'Developer Trainee',
+      icon: <GitBranch className="text-primary" size={20} />,
+      abstract: 'Building fluency in GitHub branching workflows, pull requests, CI/CD concepts, API testing, and repeatable delivery practices for full-stack applications.'
     },
     {
       id: 'r3',
-      date: '2023 - 2024',
-      title: 'Generalization Bounds in Deep Diagnostics Ensembles',
-      field: 'Medical Deep Learning',
-      role: 'Co-Researcher',
-      icon: <Cpu className="text-secondaryAccent" size={20} />,
-      abstract: 'Explored ensemble mathematical bounds for diverse neural networks (ResNet-50, DenseNet-121, EfficientNet-B0) under data scarcity. Implemented custom contrast enhancement pipelines (CLAHE) and scaling bounds to prevent over-fitting on small clinical samples.'
+      date: '2024 - Present',
+      title: 'Full-Stack Development Journey',
+      field: 'Python, Django & React',
+      role: 'Software Developer',
+      icon: <Server className="text-secondaryAccent" size={20} />,
+      abstract: 'Creating end-to-end web applications with Django, Django REST Framework, React, MySQL, PostgreSQL, authentication, and well-structured REST APIs.'
     }
   ]
 
@@ -48,7 +48,7 @@ export const Research = () => {
             transition={{ duration: 0.5 }}
             className="text-xs font-semibold tracking-[0.25em] text-accent uppercase block mb-3 font-heading"
           >
-            RESEARCH
+            CAREER JOURNEY
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
@@ -57,7 +57,7 @@ export const Research = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-5xl font-bold tracking-tight text-textPrimary font-heading"
           >
-            AI &amp; LLM Security Research
+            Building for the Cloud
           </motion.h2>
         </div>
 

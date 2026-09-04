@@ -12,7 +12,7 @@ export const Navbar = () => {
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
-    { id: 'research', label: 'Research' },
+    { id: 'research', label: 'Journey' },
     { id: 'education', label: 'Education' },
     { id: 'achievements', label: 'Achievements' },
   ]
@@ -74,7 +74,7 @@ export const Navbar = () => {
           onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}
           className="font-heading text-xl font-bold tracking-wider text-textPrimary hover:opacity-80 transition-opacity"
         >
-          faraz<span className="text-accent">.sec</span>
+          agil<span className="text-accent">.dev</span>
         </a>
 
         {/* Desktop Links */}
@@ -105,7 +105,7 @@ export const Navbar = () => {
 
         {/* Quick Social Buttons */}
         <div className="hidden lg:flex items-center gap-4 text-textSecondary">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+          <a href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors" aria-label="Agil Faraz on GitHub">
             <Github size={18} />
           </a>
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
@@ -153,7 +153,7 @@ export const Navbar = () => {
                 </a>
               ))}
               <div className="flex gap-6 mt-4 pt-6 border-t border-white/5 text-textSecondary">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors flex items-center gap-2">
+                <a href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors flex items-center gap-2">
                   <Github size={20} /> GitHub
                 </a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors flex items-center gap-2">

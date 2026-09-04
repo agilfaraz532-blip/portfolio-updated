@@ -1,36 +1,36 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ShieldCheck, BrainCircuit, Users, BookOpen } from 'lucide-react'
+import { Cloud, Code2, Database, Users } from 'lucide-react'
 import SpotlightCard from './SpotlightCard'
 
 export const About = () => {
   const stats = [
-    { value: '7+', label: 'Active Projects' },
-    { value: '15+', label: 'Technologies Mastered' },
+    { value: '2', label: 'Featured Projects' },
+    { value: '15+', label: 'Tools & Technologies' },
     { value: '2', label: 'Leadership Roles' },
-    { value: '2', label: 'Core Research Fields' },
+    { value: '1', label: 'Cloud Career Path' },
   ]
 
   const pillars = [
     {
-      icon: <ShieldCheck className="text-accent" size={24} />,
-      title: 'Risk & Threat Assessment',
-      description: 'Audit network infrastructure, map vulnerabilities using Burp Suite and Wireshark, and build threat models.'
+      icon: <Code2 className="text-accent" size={24} />,
+      title: 'Full Stack Development',
+      description: 'Build robust web applications with Python, Django, DRF, React.js, REST APIs, and clean backend architecture.'
     },
     {
-      icon: <BrainCircuit className="text-primary" size={24} />,
-      title: 'AI & Deep Learning Systems',
-      description: 'Design transparent medical classifiers and research model safety against prompt injections and data poisoning.'
+      icon: <Cloud className="text-primary" size={24} />,
+      title: 'DevOps & Cloud Infrastructure',
+      description: 'Learn to containerize, deploy, and monitor applications using AWS, Docker, CI/CD, Linux, and shell scripting.'
     },
     {
-      icon: <Users className="text-secondaryAccent" size={24} />,
+      icon: <Database className="text-secondaryAccent" size={24} />,
+      title: 'Data & APIs',
+      description: 'Design reliable data flows with MySQL, PostgreSQL, authentication, and well-documented RESTful APIs.'
+    },
+    {
+      icon: <Users className="text-accent" size={24} />,
       title: 'Mentorship & Community',
-      description: 'Lead peer coding groups and scale regional developer clusters to grow collaborative learning spaces.'
-    },
-    {
-      icon: <BookOpen className="text-accent" size={24} />,
-      title: 'Secure Web Engineering',
-      description: 'Implement backend databases, role-based access rules (RBAC), and encrypt APIs in Django and React.'
+      description: 'Lead peer coding groups and mentor students as MuLearn Creative Lead and NRPF Cluster Head.'
     }
   ]
 
@@ -55,7 +55,7 @@ export const About = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl md:text-5xl font-bold tracking-tight text-textPrimary font-heading"
           >
-            Bridging Security, Software &amp; AI
+            Bridging Development, Cloud &amp; AI
           </motion.h2>
         </div>
 
@@ -69,15 +69,15 @@ export const About = () => {
             className="lg:col-span-6 flex flex-col gap-8"
           >
             <h3 className="text-2xl font-bold font-heading text-textPrimary leading-snug">
-              Designing Secure Solutions for the Next Generation of Threat Intelligence
+              Building Scalable Applications and Resilient Cloud Infrastructure
             </h3>
             
             <p className="text-textSecondary leading-relaxed">
-              I am a Cyber Security Specialist and Programmer with a passionate commitment to engineering secure web applications and studying the intersections of deep learning model safety. My academic training in Computer Science and Cyber Security at UCE Thodupuzha provides a rigorous basis for solving network vulnerabilities, packet forensic audits, and cryptographic integrations.
+              I am a B.Tech Computer Science student and Python full-stack developer with hands-on experience in Django, React, Java, REST APIs, and relational databases. I enjoy turning practical product needs into clean, dependable software.
             </p>
             
             <p className="text-textSecondary leading-relaxed">
-              Beyond individual coding, I focus heavily on leadership and community building, directing peer-to-peer developer training and coaching students as a regional Senior Mentor. My philosophy is that security should be designed from the foundation up rather than patched on afterwards.
+              I am also developing as a DevOps and cloud computing trainee, with a focus on AWS, Docker, CI/CD, GitHub workflows, Linux, and deployment automation. Alongside engineering, I have led peer learning communities as a MuLearn Creative Lead and NRPF Senior Mentor.
             </p>
 
             {/* Stats Grid */}

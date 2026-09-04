@@ -6,57 +6,57 @@ import SpotlightCard from './SpotlightCard'
 export const Skills = () => {
   const skillCategories = [
     {
-      title: 'Cyber Security',
-      icon: <Shield className="text-accent" size={20} />,
-      skills: [
-        { name: 'Risk Assessment & Threat Analysis', level: 90 },
-        { name: 'Network Security Architecture', level: 88 },
-        { name: 'AI & LLM Safety Models', level: 85 },
-      ]
-    },
-    {
       title: 'Programming',
       icon: <Code className="text-primary" size={20} />,
       skills: [
-        { name: 'Python (Advanced Development)', level: 92 },
-        { name: 'Java (OOP & System Design)', level: 85 },
-        { name: 'C Language (Systems Programming)', level: 80 },
-      ]
-    },
-    {
-      title: 'Artificial Intelligence',
-      icon: <Brain className="text-secondaryAccent" size={20} />,
-      skills: [
-        { name: 'Deep Learning (CNNs / ResNet)', level: 88 },
-        { name: 'Explainable AI (Grad-CAM, LIME)', level: 84 },
-        { name: 'Data Preprocessing & Augmentation', level: 82 },
+        { name: 'Python', level: 90 },
+        { name: 'Java & OOP', level: 78 },
+        { name: 'C & Data Structures', level: 72 },
       ]
     },
     {
       title: 'Web Development',
       icon: <Globe className="text-accent" size={20} />,
       skills: [
-        { name: 'Django Web Framework', level: 88 },
-        { name: 'React.js & JavaScript (ES6+)', level: 80 },
-        { name: 'Tailwind CSS & Modern Frontends', level: 90 },
+        { name: 'Django & DRF', level: 85 },
+        { name: 'React.js', level: 78 },
+        { name: 'RESTful APIs', level: 84 },
       ]
     },
     {
-      title: 'Databases & Access',
-      icon: <Database className="text-primary" size={20} />,
-      skills: [
-        { name: 'MySQL Database Design', level: 85 },
-        { name: 'Role-Based Access Control (RBAC)', level: 86 },
-        { name: 'AES-256 Data Encryption', level: 84 },
-      ]
-    },
-    {
-      title: 'Networking & Tools',
+      title: 'DevOps & Cloud',
       icon: <Network className="text-secondaryAccent" size={20} />,
       skills: [
-        { name: 'Nmap Scanner (Network Mapping)', level: 90 },
-        { name: 'Burp Suite (Vulnerability Scan)', level: 88 },
-        { name: 'Wireshark (Packet Inspection)', level: 85 },
+        { name: 'AWS Cloud Fundamentals', level: 70 },
+        { name: 'Docker & Containers', level: 72 },
+        { name: 'CI/CD Pipelines', level: 70 },
+      ]
+    },
+    {
+      title: 'Databases & Security',
+      icon: <Database className="text-primary" size={20} />,
+      skills: [
+        { name: 'MySQL & PostgreSQL', level: 80 },
+        { name: 'Authentication & RBAC', level: 78 },
+        { name: 'Postman & API Testing', level: 82 },
+      ]
+    },
+    {
+      title: 'OS & Scripting',
+      icon: <Shield className="text-accent" size={20} />,
+      skills: [
+        { name: 'Linux Fundamentals', level: 76 },
+        { name: 'Shell Scripting', level: 70 },
+        { name: 'Git & GitHub Workflows', level: 85 },
+      ]
+    },
+    {
+      title: 'Artificial Intelligence',
+      icon: <Brain className="text-secondaryAccent" size={20} />,
+      skills: [
+        { name: 'Deep Learning & CNNs', level: 78 },
+        { name: 'Explainable AI (Grad-CAM)', level: 75 },
+        { name: 'Data Preprocessing', level: 80 },
       ]
     }
   ]
