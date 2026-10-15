@@ -62,7 +62,7 @@ export const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="relative py-24 overflow-hidden border-t border-white/5 bg-[#050816]">
+    <section id="skills" className="relative py-24 overflow-hidden border-t border-white/5 bg-bgDark">
       <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] bg-secondaryAccent/10 rounded-full filter blur-[120px] -z-10" />
       <div className="absolute bottom-[20%] left-[-10%] w-[300px] h-[300px] bg-primary/10 rounded-full filter blur-[120px] -z-10" />
 
@@ -70,7 +70,7 @@ export const Skills = () => {
         <div className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-xs font-semibold tracking-[0.25em] text-accent uppercase block mb-3 font-heading"
@@ -78,11 +78,11 @@ export const Skills = () => {
             EXPERTISE
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-textPrimary font-heading"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-gold-shimmer font-heading"
           >
             My Technical Stack
           </motion.h2>
@@ -92,15 +92,15 @@ export const Skills = () => {
           {skillCategories.map((cat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.94 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <SpotlightCard className="h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110">
                       {cat.icon}
                     </div>
                     <h3 className="text-lg font-bold text-textPrimary font-heading">
@@ -121,8 +121,10 @@ export const Skills = () => {
                             whileInView={{ width: `${skill.level}%` }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
-                            className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
-                          />
+                            className="relative h-full bg-gradient-to-r from-secondaryAccent via-primary to-accent rounded-full overflow-hidden"
+                          >
+                            <span className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/60 to-transparent animate-shimmer" />
+                          </motion.div>
                         </div>
                       </div>
                     ))}

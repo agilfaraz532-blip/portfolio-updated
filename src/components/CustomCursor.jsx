@@ -65,8 +65,8 @@ export const CustomCursor = () => {
           top: `${position.y}px`,
           width: hovered ? '56px' : '28px',
           height: hovered ? '56px' : '28px',
-          backgroundColor: hovered ? 'rgba(37, 99, 235, 0.1)' : 'transparent',
-          borderColor: hovered ? '#06B6D4' : '#2563EB',
+          backgroundColor: hovered ? 'rgba(234, 179, 8, 0.12)' : 'transparent',
+          borderColor: hovered ? '#FDE68A' : '#EAB308',
         }}
       />
     </>

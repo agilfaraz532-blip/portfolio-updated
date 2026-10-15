@@ -7,42 +7,43 @@
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
   }
 
   body {
-    background-color: #050816;
-    color: #F8FAFC;
+    background-color: #000000;
+    color: #FAFAFA;
   }
 
   /* Custom Premium Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
-    background: #050816;
+    background: #000000;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: rgba(37, 99, 235, 0.2);
+    background: rgba(234, 179, 8, 0.25);
     border-radius: 999px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(6, 182, 212, 0.6);
+    background: rgba(253, 230, 138, 0.6);
   }
 }
 
 /* Glassmorphism Styles */
 .glass-panel {
-  background: rgba(10, 15, 30, 0.6);
+  background: rgba(14, 12, 8, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, box-shadow 0.4s;
 }
 
 .glass-panel-hover {
@@ -50,9 +51,9 @@
 }
 
 .glass-panel-hover:hover {
-  background: rgba(15, 22, 45, 0.7);
-  border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 15px 40px -10px rgba(6, 182, 212, 0.15);
+  background: rgba(22, 18, 10, 0.75);
+  border-color: rgba(234, 179, 8, 0.4);
+  box-shadow: 0 15px 40px -10px rgba(234, 179, 8, 0.2);
   transform: translateY(-4px);
 }
 
@@ -75,12 +76,88 @@
 .typing-cursor::after {
   content: '|';
   animation: blink 1s step-end infinite;
-  color: #06B6D4;
+  color: #FDE68A;
 }
 
 @keyframes blink {
   from, to { color: transparent }
-  50% { color: #06B6D4; }
+  50% { color: #FDE68A; }
+}
+
+/* Animated gold text */
+.text-gold-shimmer {
+  background: linear-gradient(110deg, #B45309 0%, #EAB308 25%, #FEF3C7 45%, #EAB308 60%, #B45309 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-sweep 5s linear infinite;
+}
+
+@keyframes gold-sweep {
+  from { background-position: 0% center; }
+  to { background-position: 250% center; }
+}
+
+/* Shine sweep for buttons */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewX(-20deg);
+  animation: btn-shine 3.2s ease-in-out infinite;
+}
+
+@keyframes btn-shine {
+  0%, 60% { left: -60%; }
+  100% { left: 140%; }
+}
+
+/* Rotating gold border ring */
+.gold-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 32px;
+  background: conic-gradient(from 0deg, transparent 0deg, #EAB308 60deg, #FEF3C7 90deg, transparent 150deg, transparent 220deg, #B45309 280deg, transparent 340deg);
+  animation: spin 6s linear infinite;
+}
+
+.gold-ring-mask {
+  position: absolute;
+  inset: -2px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.gold-ring-mask > .gold-ring {
+  inset: -50%;
+  border-radius: 0;
+}
+
+/* Floating gold dust */
+.gold-dust {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #FEF3C7 0%, #EAB308 50%, transparent 70%);
+  pointer-events: none;
+  animation: dust-rise linear infinite;
+}
+
+@keyframes dust-rise {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.4; }
+  100% { transform: translate(var(--dust-x, 30px), -105vh); opacity: 0; }
 }
 
 /* Spotlight Card effect */
@@ -98,7 +175,7 @@
   bottom: 0;
   background: radial-gradient(
     800px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(37, 99, 235, 0.06),
+    rgba(234, 179, 8, 0.06),
     transparent 40%
   );
   z-index: 1;
@@ -114,7 +191,7 @@
   bottom: 0;
   background: radial-gradient(
     350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(6, 182, 212, 0.2),
+    rgba(253, 230, 138, 0.18),
     transparent 40%
   );
   z-index: 0;
@@ -125,4 +202,17 @@
 
 .spotlight-card:hover::after {
   opacity: 1;
+}
+
+.spotlight-card:hover {
+  border-color: rgba(234, 179, 8, 0.35);
+  box-shadow: 0 20px 45px -15px rgba(234, 179, 8, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

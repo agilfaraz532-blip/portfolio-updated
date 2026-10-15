@@ -10,7 +10,7 @@ export const Footer = () => {
   }
 
   return (
-    <footer className="relative pt-16 pb-12 bg-[#030611] border-t border-white/5 overflow-hidden text-left">
+    <footer className="relative pt-16 pb-12 bg-black border-t border-white/5 overflow-hidden text-left">
       {/* Background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[150px] bg-primary/10 rounded-full filter blur-[100px] -z-10" />
 

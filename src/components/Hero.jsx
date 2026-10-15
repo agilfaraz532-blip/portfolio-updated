@@ -42,6 +42,11 @@ export const Hero = () => {
     return () => clearTimeout(timer)
   }, [displayText, isDeleting, titleIndex])
 
+  const socialItem = {
+    hidden: { opacity: 0, y: 20, scale: 0.5 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 15 } },
+  }
+
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e
@@ -70,9 +75,9 @@ export const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
       {/* Background glows */}
-      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-primary/20 rounded-full filter blur-[100px] animate-pulse-slow -z-10" />
-      <div className="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] bg-accent/15 rounded-full filter blur-[100px] animate-pulse-slow -z-10" />
-      <div className="absolute top-[40%] right-[30%] w-[250px] h-[250px] bg-secondaryAccent/10 rounded-full filter blur-[90px] -z-10" />
+      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-primary/15 rounded-full filter blur-[100px] animate-drift -z-10" />
+      <div className="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] bg-accent/10 rounded-full filter blur-[100px] animate-drift [animation-delay:-6s] -z-10" />
+      <div className="absolute top-[40%] right-[30%] w-[250px] h-[250px] bg-secondaryAccent/10 rounded-full filter blur-[90px] animate-drift [animation-delay:-12s] -z-10" />
 
       {/* Cyber Grid overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]" />
@@ -90,8 +95,20 @@ export const Hero = () => {
             Open to Software Developer / Trainee Roles
           </span>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 text-textPrimary leading-none font-heading">
-            AGIL FARAZ
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-none font-heading flex flex-wrap justify-center lg:justify-start" aria-label="AGIL FARAZ">
+            {'AGIL FARAZ'.split('').map((char, i) => (
+              <motion.span
+                key={i}
+                aria-hidden="true"
+                initial={{ opacity: 0, y: 60, rotateX: -90 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ type: 'spring', stiffness: 120, damping: 12, delay: 0.3 + i * 0.06 }}
+                whileHover={{ y: -8, scale: 1.15, transition: { type: 'spring', stiffness: 400 } }}
+                className="inline-block text-gold-shimmer"
+              >
+                {char === ' ' ? ' ' : char}
+              </motion.span>
+            ))}
           </h1>
 
           <h2 className="text-xl md:text-3xl font-medium text-textSecondary h-10 md:h-12 mb-6">
@@ -104,46 +121,60 @@ export const Hero = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 w-full sm:w-auto">
-            <a
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
               href="resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-accent text-white font-semibold flex items-center justify-center gap-2.5 shadow-[0_4px_20px_rgba(37,99,235,0.4)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.6)] hover:-translate-y-0.5 transition-all w-full sm:w-auto text-sm tracking-wide"
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient-x text-black font-semibold btn-shine flex items-center justify-center gap-2.5 shadow-[0_4px_20px_rgba(234,179,8,0.4)] hover:shadow-[0_6px_24px_rgba(234,179,8,0.6)] hover:-translate-y-0.5 transition-all w-full sm:w-auto text-sm tracking-wide"
             >
               Download Resume
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
               href="https://wa.me/917558043694"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 rounded-full border border-white/10 bg-white/5 text-textPrimary font-semibold hover:bg-white/10 hover:border-accent hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5 w-full sm:w-auto text-sm tracking-wide"
+              className="px-8 py-3.5 rounded-full border border-white/10 bg-white/5 text-textPrimary font-semibold hover:bg-white/10 hover:border-accent transition-all group flex items-center justify-center gap-2.5 w-full sm:w-auto text-sm tracking-wide"
             >
-              Hire Me <ArrowRight size={16} className="text-accent" />
-            </a>
+              Hire Me <ArrowRight size={16} className="text-accent transition-transform group-hover:translate-x-1" />
+            </motion.a>
           </div>
 
           {/* Social Grid */}
-          <div className="flex items-center gap-5 text-textSecondary">
-            <a href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
+          <motion.div
+            className="flex items-center gap-5 text-textSecondary"
+            initial="hidden"
+            animate="show"
+            variants={{ show: { transition: { staggerChildren: 0.1, delayChildren: 1.1 } } }}
+          >
+            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
               <Github size={18} />
-            </a>
-            <a href="https://linkedin.com/in/agilfaraz" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
+            </motion.a>
+            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="https://linkedin.com/in/agilfaraz" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
               <Linkedin size={18} />
-            </a>
-            <a href="mailto:agilfaraz532@gmail.com" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
+            </motion.a>
+            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="mailto:agilfaraz532@gmail.com" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
               <Mail size={18} />
-            </a>
-            <a href="tel:+917558043694" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 transition-all">
+            </motion.a>
+            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="tel:+917558043694" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
               <Phone size={18} />
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         {/* Right Visual Profile Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}
+          animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
+          transition={{
+            duration: 1,
+            ease: 'easeOut',
+            delay: 0.1,
+            y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.2 },
+          }}
           className="lg:col-span-5 flex justify-center items-center z-10"
         >
           <div
@@ -153,16 +184,21 @@ export const Hero = () => {
             }}
           >
             {/* Pulsing card backdrop shadow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary via-accent to-secondaryAccent rounded-[32px] filter blur-[20px] opacity-40 animate-pulse-slow" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary via-accent to-secondaryAccent rounded-[32px] filter blur-[24px] opacity-30 animate-pulse-slow" />
+
+            {/* Rotating gold border */}
+            <div className="gold-ring-mask">
+              <div className="gold-ring" />
+            </div>
 
             {/* Profile Card Container */}
-            <div className="relative w-full aspect-[4/5] rounded-[30px] overflow-hidden bg-gradient-to-b from-[#0e1630] to-[#080d21] border border-white/10 p-5 shadow-2xl backdrop-blur-xl flex flex-col justify-between">
+            <div className="relative w-full aspect-[4/5] rounded-[30px] overflow-hidden bg-gradient-to-b from-[#17130a] to-[#0a0906] border border-white/10 p-5 shadow-2xl backdrop-blur-xl flex flex-col justify-between">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-[10px] font-mono text-accent tracking-[0.2em] uppercase">DEV.PORTFOLIO: CLOUD_READY</span>
                 <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
               </div>
 
-              <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#050816] border border-white/5 flex items-center justify-center">
+              <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-bgDark border border-white/5 flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10 z-10" />
                 <div className="absolute inset-0 border-[3px] border-accent/20 rounded-2xl z-20 pointer-events-none" />
 
@@ -172,7 +208,7 @@ export const Hero = () => {
                   className="w-full h-full object-cover select-none scale-[1.05] filter brightness-[0.88] contrast-[1.05]"
                 />
 
-                <div className="absolute bottom-3 right-3 bg-[#050816]/90 border border-white/15 px-3 py-1 rounded-lg backdrop-blur-md z-20 text-[10px] font-mono font-bold text-accent">
+                <div className="absolute bottom-3 right-3 bg-bgDark/90 border border-white/15 px-3 py-1 rounded-lg backdrop-blur-md z-20 text-[10px] font-mono font-bold text-accent">
                   AGIL.DEV // 01
                 </div>
               </div>

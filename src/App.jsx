@@ -4,6 +4,8 @@ import LoadingScreen from './components/LoadingScreen'
 import Navbar from './components/Navbar'
 import BackgroundCanvas from './components/BackgroundCanvas'
 import CustomCursor from './components/CustomCursor'
+import GoldDust from './components/GoldDust'
+import TechMarquee from './components/TechMarquee'
 import Hero from './components/Hero'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -35,11 +37,13 @@ function App() {
           className="relative min-h-screen"
         >
           <motion.div
-            className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-accent to-secondaryAccent z-[9999] origin-left"
+            className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-secondaryAccent via-primary to-accent shadow-[0_0_12px_rgba(234,179,8,0.7)] z-[9999] origin-left"
             style={{ scaleX }}
           />
 
           <BackgroundCanvas />
+
+          <GoldDust />
 
           <CustomCursor />
 
@@ -47,6 +51,7 @@ function App() {
 
           <main>
             <Hero />
+            <TechMarquee />
             <About />
             <Skills />
             <Projects />

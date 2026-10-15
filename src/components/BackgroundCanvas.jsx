@@ -6,10 +6,11 @@ export const BackgroundCanvas = () => {
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 })
 
   useEffect(() => {
-    if (!containerRef.current) return
+    const container = containerRef.current
+    if (!container) return
 
-    const width = containerRef.current.clientWidth
-    const height = containerRef.current.clientHeight
+    const width = window.innerWidth
+    const height = window.innerHeight
 
     // Scene
     const scene = new THREE.Scene()
@@ -22,7 +23,7 @@ export const BackgroundCanvas = () => {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     renderer.setSize(width, height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    containerRef.current.appendChild(renderer.domElement)
+    container.appendChild(renderer.domElement)
 
     // Particles Geometry
     const count = 1200
@@ -49,7 +50,7 @@ export const BackgroundCanvas = () => {
     // Material
     const material = new THREE.PointsMaterial({
       size: 0.035,
-      color: 0x06B6D4, // cyan accent
+      color: 0xFDE68A, // pale gold accent
       transparent: true,
       opacity: 0.45,
       blending: THREE.AdditiveBlending,
@@ -62,7 +63,7 @@ export const BackgroundCanvas = () => {
 
     // Draw connection lines for a net-like cyber structure
     const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x2563EB, // blue primary
+      color: 0xEAB308, // gold primary
       transparent: true,
       opacity: 0.08,
       blending: THREE.AdditiveBlending,
@@ -96,9 +97,8 @@ export const BackgroundCanvas = () => {
 
     // Window Resize listener
     const handleResize = () => {
-      if (!containerRef.current) return
-      const w = containerRef.current.clientWidth
-      const h = containerRef.current.clientHeight
+      const w = window.innerWidth
+      const h = window.innerHeight
       camera.aspect = w / h
       camera.updateProjectionMatrix()
       renderer.setSize(w, h)
@@ -157,8 +157,8 @@ export const BackgroundCanvas = () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(animationFrameId)
-      if (containerRef.current && renderer.domElement.parentNode) {
-        containerRef.current.removeChild(renderer.domElement)
+      if (renderer.domElement.parentNode === container) {
+        container.removeChild(renderer.domElement)
       }
       geometry.dispose()
       material.dispose()
@@ -171,7 +171,7 @@ export const BackgroundCanvas = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full -z-10 pointer-events-none opacity-40 bg-[#050816]"
+      className="fixed inset-0 w-full h-full -z-10 pointer-events-none opacity-40 bg-bgDark overflow-hidden"
     />
   )
 }

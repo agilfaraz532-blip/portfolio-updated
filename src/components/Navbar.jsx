@@ -63,7 +63,7 @@ export const Navbar = () => {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#050816]/75 backdrop-blur-md border-b border-white/5 py-4'
+          ? 'bg-bgDark/75 backdrop-blur-md border-b border-white/5 py-4'
           : 'bg-transparent py-6'
       }`}
     >
@@ -74,7 +74,7 @@ export const Navbar = () => {
           onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}
           className="font-heading text-xl font-bold tracking-wider text-textPrimary hover:opacity-80 transition-opacity"
         >
-          agil<span className="text-accent">.dev</span>
+          agil<span className="text-gold-shimmer">.dev</span>
         </a>
 
         {/* Desktop Links */}
@@ -134,7 +134,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden w-full bg-[#050816]/95 border-b border-white/5 backdrop-blur-lg overflow-hidden"
+            className="lg:hidden w-full bg-bgDark/95 border-b border-white/5 backdrop-blur-lg overflow-hidden"
           >
             <div className="px-6 py-8 flex flex-col gap-4">
               {navLinks.map((link) => (

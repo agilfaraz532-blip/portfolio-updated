@@ -35,11 +35,11 @@ export const LoadingScreen = ({ onComplete }) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
-          className="fixed inset-0 w-full h-full bg-[#050816] z-[99999] flex flex-col items-center justify-center font-heading"
+          className="fixed inset-0 w-full h-full bg-bgDark z-[99999] flex flex-col items-center justify-center font-heading"
         >
           <div className="relative flex flex-col items-center max-w-sm w-full px-8">
             {/* Pulsing glow background blob */}
-            <div className="absolute w-48 h-48 bg-primary rounded-full filter blur-[80px] opacity-25 -z-10" />
+            <div className="absolute w-48 h-48 bg-primary rounded-full filter blur-[80px] opacity-25 -z-10 animate-pulse-slow" />
 
             {/* Logo Text Animation */}
             <motion.div
@@ -48,7 +48,7 @@ export const LoadingScreen = ({ onComplete }) => {
               transition={{ duration: 0.8 }}
               className="text-3xl font-bold tracking-widest text-textPrimary flex items-center gap-1 mb-8"
             >
-              FARAZ<span className="text-accent">.SEC</span>
+              <span className="text-gold-shimmer">FARAZ</span><span className="text-accent">.SEC</span>
             </motion.div>
 
             {/* Scanning details / Subtitles */}

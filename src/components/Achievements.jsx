@@ -35,7 +35,7 @@ export const Achievements = () => {
   ]
 
   return (
-    <section id="achievements" className="relative py-24 overflow-hidden border-t border-white/5 bg-[#050816]">
+    <section id="achievements" className="relative py-24 overflow-hidden border-t border-white/5 bg-bgDark">
       <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] bg-accent/10 rounded-full filter blur-[130px] -z-10 animate-pulse-slow" />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -43,7 +43,7 @@ export const Achievements = () => {
         <div className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-xs font-semibold tracking-[0.25em] text-accent uppercase block mb-3 font-heading"
@@ -51,11 +51,11 @@ export const Achievements = () => {
             HONOURS
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-textPrimary font-heading"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-gold-shimmer font-heading"
           >
             Achievements &amp; Leadership
           </motion.h2>
@@ -67,7 +67,7 @@ export const Achievements = () => {
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
             >

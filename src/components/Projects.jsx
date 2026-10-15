@@ -193,7 +193,7 @@ export const Projects = () => {
 
     // Custom CSS mockups for other projects
     return (
-      <div className="w-full h-full bg-gradient-to-br from-[#0e1630] to-[#050816] flex flex-col items-center justify-center p-6 relative overflow-hidden border-b border-white/5">
+      <div className="w-full h-full bg-gradient-to-br from-[#17130a] to-black flex flex-col items-center justify-center p-6 relative overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:20px_20px] opacity-25" />
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary/20 to-accent/20 border border-white/10 flex items-center justify-center mb-3">
           {project.category === 'security' && <Shield className="text-accent" size={32} />}
@@ -207,7 +207,7 @@ export const Projects = () => {
   }
 
   return (
-    <section id="projects" className="relative py-24 overflow-hidden border-t border-white/5 bg-[#050816]">
+    <section id="projects" className="relative py-24 overflow-hidden border-t border-white/5 bg-bgDark">
       <div className="absolute top-[10%] left-[-10%] w-[350px] h-[350px] bg-primary/10 rounded-full filter blur-[130px] -z-10 animate-pulse-slow" />
 
       <div className="max-w-7xl mx-auto px-6">
@@ -215,7 +215,7 @@ export const Projects = () => {
         <div className="text-center mb-12">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-xs font-semibold tracking-[0.25em] text-accent uppercase block mb-3 font-heading"
@@ -223,11 +223,11 @@ export const Projects = () => {
             PORTFOLIO
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-textPrimary font-heading"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-gold-shimmer font-heading"
           >
             Featured Engineering Work
           </motion.h2>
@@ -244,7 +244,7 @@ export const Projects = () => {
               }}
               className={`px-5 py-2.5 rounded-full text-xs font-semibold font-heading tracking-wider uppercase border transition-all duration-300 ${
                 filter === cat.id
-                  ? 'bg-primary border-primary text-white shadow-[0_4px_12px_rgba(37,99,235,0.3)]'
+                  ? 'bg-primary border-primary text-black shadow-[0_4px_12px_rgba(234,179,8,0.3)]'
                   : 'bg-white/5 border-white/10 text-textSecondary hover:border-accent hover:text-textPrimary'
               }`}
             >
@@ -268,7 +268,7 @@ export const Projects = () => {
                 <div>
                   {/* Card Visual Header */}
                   <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/40">
-                    <div className="absolute top-4 left-4 bg-[#050816]/95 border border-white/10 px-3 py-1 rounded-full backdrop-blur-md z-20 text-[10px] font-semibold text-accent uppercase tracking-widest">
+                    <div className="absolute top-4 left-4 bg-bgDark/95 border border-white/10 px-3 py-1 rounded-full backdrop-blur-md z-20 text-[10px] font-semibold text-accent uppercase tracking-widest">
                       {project.badge}
                     </div>
                     {renderCardGraphic(project)}
