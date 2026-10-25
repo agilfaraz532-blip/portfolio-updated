@@ -1,118 +1,105 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Cloud, GitBranch, Server } from 'lucide-react'
-import SpotlightCard from './SpotlightCard'
+import React, { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
+import { Cloud, GitBranch, Server, GraduationCap, School } from 'lucide-react'
+import SectionHeader from './SectionHeader'
+
+const journey = [
+  {
+    year: 'Now',
+    type: 'Training',
+    icon: Cloud,
+    title: 'DevOps & Cloud Computing Trainee',
+    org: 'Cloud-native foundations',
+    text: 'Building practical deployment skills across AWS, Docker, Kubernetes, Linux, environment configuration and scalable application delivery.',
+  },
+  {
+    year: 'Now',
+    type: 'Practice',
+    icon: GitBranch,
+    title: 'Continuous Delivery Practice',
+    org: 'Automation & reliability',
+    text: 'GitHub branching workflows, pull requests, CI/CD pipelines, API testing and repeatable delivery for full-stack applications.',
+  },
+  {
+    year: '2024',
+    type: 'Experience',
+    icon: Server,
+    title: 'Full-Stack Developer',
+    org: 'Python, Django & React',
+    text: 'Creating end-to-end web applications with Django, DRF, React, MySQL, PostgreSQL, authentication and well-structured REST APIs.',
+  },
+  {
+    year: '2022',
+    type: 'Education',
+    icon: GraduationCap,
+    title: 'B.Tech in Computer Science & Cyber Security',
+    org: 'University College of Engineering, Thodupuzha · 2022 – 2026',
+    text: 'Software engineering, databases, computer networks and secure application development. Final project: chest pathology detection with deep learning.',
+  },
+  {
+    year: 'School',
+    type: 'Education',
+    icon: School,
+    title: 'Pre-University & SSLC',
+    org: 'Jawahar Navodaya Vidyalaya, Wayanad',
+    text: 'Completed pre-university and secondary education.',
+  },
+]
+
+const ease = [0.22, 1, 0.36, 1]
 
 export const Research = () => {
-  const researchItems = [
-    {
-      id: 'r1',
-      date: 'Present',
-      title: 'DevOps & Cloud Computing Trainee',
-      field: 'Cloud-Native Foundations',
-      role: 'Trainee Engineer',
-      icon: <Cloud className="text-accent" size={20} />,
-      abstract: 'Developing practical deployment skills across AWS cloud fundamentals, Docker containers, Linux, environment configuration, and scalable application delivery.'
-    },
-    {
-      id: 'r2',
-      date: 'Present',
-      title: 'Continuous Delivery Practice',
-      field: 'Automation & Reliability',
-      role: 'Developer Trainee',
-      icon: <GitBranch className="text-primary" size={20} />,
-      abstract: 'Building fluency in GitHub branching workflows, pull requests, CI/CD concepts, API testing, and repeatable delivery practices for full-stack applications.'
-    },
-    {
-      id: 'r3',
-      date: '2024 - Present',
-      title: 'Full-Stack Development Journey',
-      field: 'Python, Django & React',
-      role: 'Software Developer',
-      icon: <Server className="text-secondaryAccent" size={20} />,
-      abstract: 'Creating end-to-end web applications with Django, Django REST Framework, React, MySQL, PostgreSQL, authentication, and well-structured REST APIs.'
-    }
-  ]
+  const listRef = useRef(null)
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 60%'] })
+  const lineScale = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
 
   return (
-    <section id="research" className="relative py-24 overflow-hidden border-t border-white/5 bg-bgDark">
-      <div className="absolute top-[20%] right-[-10%] w-[350px] h-[350px] bg-secondaryAccent/10 rounded-full filter blur-[140px] -z-10 animate-pulse-slow" />
+    <section id="research" className="relative py-32 overflow-hidden">
+      <div className="max-w-5xl mx-auto px-5 sm:px-6">
+        <SectionHeader index="04" label="Experience & education" title="My Journey" />
 
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-xs font-semibold tracking-[0.25em] text-accent uppercase block mb-3 font-heading"
-          >
-            CAREER JOURNEY
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-gold-shimmer font-heading"
-          >
-            Building for the Cloud
-          </motion.h2>
-        </div>
+        <div ref={listRef} className="relative">
+          {/* Track + progress line that fills as you scroll */}
+          <div className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-2 bottom-2 w-px bg-white/10" />
+          <motion.div
+            style={{ scaleY: lineScale }}
+            className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-accent via-primary to-primary/0 shadow-[0_0_10px_rgba(59,130,246,0.8)]"
+          />
 
-        {/* Vertical Timeline Layout */}
-        <div className="relative max-w-4xl mx-auto pl-8 border-l border-white/10 flex flex-col gap-12 text-left">
-          {/* Vertical Glowing Line overlay */}
-          <div className="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-accent to-transparent" />
-
-          {researchItems.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="relative"
-            >
-              {/* Chronological Circle Indicator */}
-              <div className="absolute left-[-41px] top-4 w-[24px] h-[24px] rounded-full bg-bgDark border-[3px] border-primary flex items-center justify-center z-10">
-                <span className="w-2.5 h-2.5 rounded-full bg-accent animate-ping" />
-              </div>
-
-              {/* Research Card */}
-              <SpotlightCard className="p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start">
-                {/* Visual Icon Box */}
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-                  {item.icon}
+          <div className="flex flex-col gap-10">
+            {journey.map(({ year, type, icon: Icon, title, org, text }, i) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7, ease, delay: i * 0.05 }}
+                className="relative sm:grid sm:grid-cols-[88px_1fr] md:grid-cols-[120px_1fr] items-start"
+              >
+                <div className="hidden sm:block pr-6 md:pr-10 pt-1 text-right font-heading text-sm md:text-base font-semibold text-textSecondary">
+                  {year}
                 </div>
 
-                {/* Content */}
-                <div className="flex-grow">
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-2">
-                    <span className="text-xs font-mono font-bold text-accent tracking-widest uppercase">
-                      {item.field}
-                    </span>
-                    <span className="text-xs font-semibold text-textSecondary bg-white/5 px-3 py-1 rounded-full border border-white/5">
-                      {item.date}
-                    </span>
+                {/* Node */}
+                <span className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-1.5 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-accent bg-bgDark shadow-[0_0_12px_2px_rgba(59,130,246,0.6)]">
+                  <span className="absolute inset-1 rounded-full bg-accent" />
+                </span>
+
+                <div className="pl-8 md:pl-12">
+                  <div className="group rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6 transition-[border-color,background-color] duration-300 hover:border-primary/40 hover:bg-primary/[0.04]">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Icon size={15} className="text-accent" />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">{type}</span>
+                      <span className="sm:hidden ml-auto font-mono text-[10px] uppercase tracking-[0.2em] text-textSecondary">{year}</span>
+                    </div>
+                    <h3 className="font-heading text-lg md:text-xl font-semibold text-textPrimary mb-1">{title}</h3>
+                    <div className="text-sm text-textSecondary/80 mb-3">{org}</div>
+                    <p className="text-sm text-textSecondary leading-relaxed">{text}</p>
                   </div>
-
-                  <h3 className="text-xl font-bold tracking-tight text-textPrimary font-heading mb-2">
-                    {item.title}
-                  </h3>
-
-                  <div className="text-xs font-mono font-semibold text-textSecondary uppercase tracking-widest mb-4">
-                    Role: <span className="text-accent">{item.role}</span>
-                  </div>
-
-                  <p className="text-sm text-textSecondary leading-relaxed border-l-2 border-white/10 pl-4 py-1 italic bg-white/[0.01]">
-                    &ldquo;{item.abstract}&rdquo;
-                  </p>
                 </div>
-              </SpotlightCard>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

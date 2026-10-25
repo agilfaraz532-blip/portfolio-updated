@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Award, TrendingUp, Trophy } from 'lucide-react'
 import SpotlightCard from './SpotlightCard'
+import SectionHeader from './SectionHeader'
 
 export const Achievements = () => {
   const achievements = [
@@ -35,31 +36,16 @@ export const Achievements = () => {
   ]
 
   return (
-    <section id="achievements" className="relative py-24 overflow-hidden border-t border-white/5 bg-bgDark">
-      <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] bg-accent/10 rounded-full filter blur-[130px] -z-10 animate-pulse-slow" />
+    <section id="achievements" className="relative py-28 overflow-hidden">
+      <div className="glow-orb top-[30%] right-[-10%] w-[350px] h-[350px] -z-10" />
 
       <div className="max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-xs font-semibold tracking-[0.25em] text-accent uppercase block mb-3 font-heading"
-          >
-            HONOURS
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold tracking-tight text-gold-shimmer font-heading"
-          >
-            Achievements &amp; Leadership
-          </motion.h2>
-        </div>
+        <SectionHeader
+          index="05"
+          label="Leadership"
+          title="Leadership &amp; Achievements"
+          description="Roles where I led teams, mentored and competed."
+        />
 
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -67,7 +53,7 @@ export const Achievements = () => {
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
             >
@@ -81,7 +67,7 @@ export const Achievements = () => {
                     <h3 className="text-xl font-bold tracking-tight text-textPrimary font-heading mb-1 leading-snug">
                       {item.title}
                     </h3>
-                    <span className="text-xs font-mono font-bold text-accent uppercase tracking-wider block mb-1">
+                    <span className="text-[11px] font-mono text-accent uppercase tracking-[0.15em] block mb-1">
                       {item.role}
                     </span>
                     <span className="text-[11px] font-sans font-medium text-textSecondary/60 block">

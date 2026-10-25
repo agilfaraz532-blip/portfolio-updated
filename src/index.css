@@ -9,65 +9,45 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Sora', sans-serif;
   }
 
   body {
-    background-color: #000000;
-    color: #FAFAFA;
+    background-color: #05070D;
+    color: #F1F5F9;
   }
 
-  /* Custom Premium Scrollbar */
+  ::selection {
+    background: rgba(59, 130, 246, 0.35);
+    color: #FFFFFF;
+  }
+
   ::-webkit-scrollbar {
     width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #000000;
+    background: #05070D;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(234, 179, 8, 0.25);
+    background: rgba(59, 130, 246, 0.3);
     border-radius: 999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(253, 230, 138, 0.6);
+    background: rgba(96, 165, 250, 0.6);
   }
 }
 
-/* Glassmorphism Styles */
+/* Card surface */
 .glass-panel {
-  background: rgba(14, 12, 8, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.6);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(8, 12, 24, 0.85));
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.45);
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s, box-shadow 0.4s;
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-panel-hover:hover {
-  background: rgba(22, 18, 10, 0.75);
-  border-color: rgba(234, 179, 8, 0.4);
-  box-shadow: 0 15px 40px -10px rgba(234, 179, 8, 0.2);
-  transform: translateY(-4px);
-}
-
-/* Aurora Backdrop Gradients */
-.aurora-bg {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(150px);
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Custom Cursor styles */
 .custom-cursor-active {
   cursor: none;
 }
@@ -76,88 +56,80 @@
 .typing-cursor::after {
   content: '|';
   animation: blink 1s step-end infinite;
-  color: #FDE68A;
+  color: #60A5FA;
 }
 
 @keyframes blink {
   from, to { color: transparent }
-  50% { color: #FDE68A; }
+  50% { color: #60A5FA; }
 }
 
-/* Animated gold text */
-.text-gold-shimmer {
-  background: linear-gradient(110deg, #B45309 0%, #EAB308 25%, #FEF3C7 45%, #EAB308 60%, #B45309 100%);
+/* Blue gradient text with a slow sheen */
+.text-accent-gradient {
+  background: linear-gradient(100deg, #2563EB 0%, #60A5FA 40%, #BFDBFE 50%, #60A5FA 60%, #2563EB 100%);
   background-size: 250% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gold-sweep 5s linear infinite;
+  animation: accent-sweep 8s ease-in-out infinite;
 }
 
-@keyframes gold-sweep {
-  from { background-position: 0% center; }
-  to { background-position: 250% center; }
+@keyframes accent-sweep {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
 }
 
-/* Shine sweep for buttons */
-.btn-shine {
-  position: relative;
-  overflow: hidden;
+/* Glowing blue button */
+.btn-glow {
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.4), 0 10px 30px -8px rgba(59, 130, 246, 0.7);
+  transition: box-shadow 0.3s, transform 0.3s, background-color 0.3s;
 }
 
-.btn-shine::after {
+.btn-glow:hover {
+  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.7), 0 14px 40px -6px rgba(59, 130, 246, 0.95);
+}
+
+/* Outline button with glow on hover */
+.btn-outline-glow {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  transition: border-color 0.3s, box-shadow 0.3s, color 0.3s, background-color 0.3s;
+}
+
+.btn-outline-glow:hover {
+  border-color: rgba(96, 165, 250, 0.8);
+  box-shadow: 0 0 24px -4px rgba(59, 130, 246, 0.6), inset 0 0 12px -4px rgba(59, 130, 246, 0.5);
+}
+
+/* Rotating circular badge text */
+.spin-badge {
+  animation: spin 14s linear infinite;
+}
+
+/* Cinematic planet: dark sphere with an atmospheric rim light */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(96, 165, 250, 0.35), transparent 45%),
+    radial-gradient(circle at 50% 50%, #0B1530 0%, #05070D 70%);
+  box-shadow:
+    0 -2px 0 0 rgba(147, 197, 253, 0.9),
+    0 -10px 40px 0 rgba(59, 130, 246, 0.9),
+    0 -40px 120px 20px rgba(37, 99, 235, 0.45),
+    inset 0 30px 60px -20px rgba(96, 165, 250, 0.55);
+}
+
+.planet::before {
+  /* faint city lights / surface texture */
   content: '';
   position: absolute;
-  top: 0;
-  left: -60%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent);
-  transform: skewX(-20deg);
-  animation: btn-shine 3.2s ease-in-out infinite;
-}
-
-@keyframes btn-shine {
-  0%, 60% { left: -60%; }
-  100% { left: 140%; }
-}
-
-/* Rotating gold border ring */
-.gold-ring {
-  position: absolute;
-  inset: -2px;
-  border-radius: 32px;
-  background: conic-gradient(from 0deg, transparent 0deg, #EAB308 60deg, #FEF3C7 90deg, transparent 150deg, transparent 220deg, #B45309 280deg, transparent 340deg);
-  animation: spin 6s linear infinite;
-}
-
-.gold-ring-mask {
-  position: absolute;
-  inset: -2px;
-  border-radius: 32px;
-  overflow: hidden;
-}
-
-.gold-ring-mask > .gold-ring {
-  inset: -50%;
-  border-radius: 0;
-}
-
-/* Floating gold dust */
-.gold-dust {
-  position: absolute;
-  bottom: -10px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, #FEF3C7 0%, #EAB308 50%, transparent 70%);
-  pointer-events: none;
-  animation: dust-rise linear infinite;
-}
-
-@keyframes dust-rise {
-  0% { transform: translate(0, 0); opacity: 0; }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.4; }
-  100% { transform: translate(var(--dust-x, 30px), -105vh); opacity: 0; }
+  inset: 0;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(147, 197, 253, 0.5) 1px, transparent 1.5px);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(circle at 50% 0%, black 0%, transparent 25%);
+  -webkit-mask-image: radial-gradient(circle at 50% 0%, black 0%, transparent 25%);
+  opacity: 0.25;
 }
 
 /* Spotlight Card effect */
@@ -169,13 +141,10 @@
 .spotlight-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: radial-gradient(
-    800px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(234, 179, 8, 0.06),
+    700px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(59, 130, 246, 0.06),
     transparent 40%
   );
   z-index: 1;
@@ -185,13 +154,10 @@
 .spotlight-card::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: radial-gradient(
-    350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(253, 230, 138, 0.18),
+    320px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(96, 165, 250, 0.14),
     transparent 40%
   );
   z-index: 0;
@@ -205,8 +171,24 @@
 }
 
 .spotlight-card:hover {
-  border-color: rgba(234, 179, 8, 0.35);
-  box-shadow: 0 20px 45px -15px rgba(234, 179, 8, 0.25);
+  border-color: rgba(96, 165, 250, 0.35);
+  box-shadow: 0 20px 45px -15px rgba(59, 130, 246, 0.3);
+}
+
+/* Soft glow without filter: blur (much cheaper to paint) */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(59, 130, 246, 0.16), transparent);
+}
+
+/* Fine grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
 @media (prefers-reduced-motion: reduce) {

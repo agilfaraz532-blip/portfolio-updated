@@ -8,16 +8,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        bgDark: "#000000",
-        primary: "#EAB308",
-        accent: "#FDE68A",
-        secondaryAccent: "#D97706",
-        textPrimary: "#FAFAFA",
-        textSecondary: "#A3A3A3",
+        bgDark: "#05070D",
+        surface: "#0B1120",
+        primary: "#3B82F6",
+        accent: "#60A5FA",
+        secondaryAccent: "#22D3EE",
+        textPrimary: "#F1F5F9",
+        textSecondary: "#94A3B8",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-        heading: ["Space Grotesk", "sans-serif"],
+        heading: ["Sora", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

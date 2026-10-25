@@ -1,241 +1,258 @@
-import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, Phone, ArrowDown, ArrowRight } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import { Github, Linkedin, Mail, ArrowRight, ArrowDown } from 'lucide-react'
+import MagneticButton from './MagneticButton'
+
+const roles = ['Python Full Stack Developer', 'DevOps & Cloud Trainee', 'Cyber Security Enthusiast']
+const keywords = ['Ideas', 'Code', 'Cloud', 'Security']
+
+const stats = [
+  { value: '6', label: 'Projects' },
+  { value: '15+', label: 'Tech stacks' },
+  { value: '100+', label: 'Students mentored' },
+  { value: '∞', label: 'Learning' },
+]
+
+const socials = [
+  { href: 'https://github.com/agilfaraz532-blip', icon: Github, label: 'GitHub', external: true },
+  { href: 'https://linkedin.com/in/agilfaraz', icon: Linkedin, label: 'LinkedIn', external: true },
+  { href: 'mailto:agilfaraz532@gmail.com', icon: Mail, label: 'Email' },
+]
+
+const ease = [0.22, 1, 0.36, 1]
+
+// Soft oval fade so the photo melts into the background on every side
+const photoMask = [
+  'linear-gradient(to bottom, transparent 0%, #000 25%, #000 65%, transparent 100%)',
+  'linear-gradient(to right, transparent 0%, #000 40%, #000 85%, transparent 100%)',
+].join(', ')
+
+// Letters rise into place one after another
+const RevealWord = ({ text, className, delay }) => (
+  <span className={`block ${className}`} aria-hidden="true">
+    {text.split('').map((char, i) => (
+      <motion.span
+        key={i}
+        className="inline-block"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease, delay: delay + i * 0.05 }}
+      >
+        {char}
+      </motion.span>
+    ))}
+  </span>
+)
+
+const scrollToSection = (id) => {
+  const element = document.getElementById(id)
+  if (element) {
+    window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' })
+  }
+}
 
 export const Hero = () => {
-  const titles = [
-    'Python Full Stack Developer',
-    'DevOps & Cloud Computing Trainee',
-    'Django & React Developer',
-    'Cloud-Native Builder',
-  ]
-
-  const [titleIndex, setTitleIndex] = useState(0)
-  const [displayText, setDisplayText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  const TYPING_SPEED = 100
-  const DELETING_SPEED = 50
-  const PAUSE_DURATION = 1500
+  const [roleIndex, setRoleIndex] = useState(0)
 
   useEffect(() => {
-    let timer
-    const currentFullText = titles[titleIndex]
-
-    if (isDeleting) {
-      timer = setTimeout(() => {
-        setDisplayText((prev) => prev.slice(0, -1))
-      }, DELETING_SPEED)
-    } else {
-      timer = setTimeout(() => {
-        setDisplayText((prev) => currentFullText.slice(0, prev.length + 1))
-      }, TYPING_SPEED)
-    }
-
-    if (!isDeleting && displayText === currentFullText) {
-      timer = setTimeout(() => setIsDeleting(true), PAUSE_DURATION)
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false)
-      setTitleIndex((prev) => (prev + 1) % titles.length)
-    }
-
-    return () => clearTimeout(timer)
-  }, [displayText, isDeleting, titleIndex])
-
-  const socialItem = {
-    hidden: { opacity: 0, y: 20, scale: 0.5 },
-    show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 260, damping: 15 } },
-  }
-
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e
-    const x = (clientX / window.innerWidth - 0.5) * 12
-    const y = (clientY / window.innerHeight - 0.5) * 12
-    setTilt({ x, y })
-  }
-
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    const timer = setInterval(() => setRoleIndex((i) => (i + 1) % roles.length), 2800)
+    return () => clearInterval(timer)
   }, [])
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const offset = 80
-      const bodyRect = document.body.getBoundingClientRect().top
-      const elementRect = element.getBoundingClientRect().top
-      const elementPosition = elementRect - bodyRect
-      const offsetPosition = elementPosition - offset
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+  // Scroll parallax: photo and planet move at different speeds
+  const { scrollY } = useScroll()
+  const photoY = useTransform(scrollY, [0, 800], [0, 120])
+  const planetY = useTransform(scrollY, [0, 800], [0, -60])
+  const contentOpacity = useTransform(scrollY, [0, 500], [1, 0])
+
+  // Mouse parallax on the photo
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const photoX = useSpring(useTransform(mx, [-1, 1], [-14, 14]), { stiffness: 60, damping: 20 })
+  const photoTilt = useSpring(useTransform(my, [-1, 1], [-8, 8]), { stiffness: 60, damping: 20 })
+
+  useEffect(() => {
+    if (!window.matchMedia('(pointer: fine)').matches) return
+    const onMove = (e) => {
+      mx.set((e.clientX / window.innerWidth - 0.5) * 2)
+      my.set((e.clientY / window.innerHeight - 0.5) * 2)
     }
-  }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [mx, my])
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
-      {/* Background glows */}
-      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-primary/15 rounded-full filter blur-[100px] animate-drift -z-10" />
-      <div className="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] bg-accent/10 rounded-full filter blur-[100px] animate-drift [animation-delay:-6s] -z-10" />
-      <div className="absolute top-[40%] right-[30%] w-[250px] h-[250px] bg-secondaryAccent/10 rounded-full filter blur-[90px] animate-drift [animation-delay:-12s] -z-10" />
-
-      {/* Cyber Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] -z-10 opacity-30 [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]" />
-
-      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-        {/* Left Content */}
+    <section id="home" className="relative min-h-screen flex flex-col overflow-hidden">
+      {/* Planet horizon */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-[84%] md:top-[83%] w-[260vw] md:w-[170vw] aspect-square pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left z-10"
+          style={{ y: planetY }}
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2, ease }}
+          className="absolute inset-0"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-accent tracking-wider uppercase mb-6">
-            <span className="w-2.5 h-2.5 rounded-full bg-accent animate-ping" />
-            Open to Software Developer / Trainee Roles
-          </span>
-
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-none font-heading flex flex-wrap justify-center lg:justify-start" aria-label="AGIL FARAZ">
-            {'AGIL FARAZ'.split('').map((char, i) => (
-              <motion.span
-                key={i}
-                aria-hidden="true"
-                initial={{ opacity: 0, y: 60, rotateX: -90 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ type: 'spring', stiffness: 120, damping: 12, delay: 0.3 + i * 0.06 }}
-                whileHover={{ y: -8, scale: 1.15, transition: { type: 'spring', stiffness: 400 } }}
-                className="inline-block text-gold-shimmer"
-              >
-                {char === ' ' ? ' ' : char}
-              </motion.span>
-            ))}
-          </h1>
-
-          <h2 className="text-xl md:text-3xl font-medium text-textSecondary h-10 md:h-12 mb-6">
-            I am a <span className="text-accent font-semibold typing-cursor">{displayText}</span>
-          </h2>
-
-          <p className="text-base md:text-lg text-textSecondary/80 max-w-xl mb-8 leading-relaxed font-sans">
-            Python full-stack developer and DevOps & Cloud Computing trainee. I build secure, scalable web applications with Django, React, REST APIs, AWS, Docker, and modern CI/CD practices.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 w-full sm:w-auto">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-              href="resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient-x text-black font-semibold btn-shine flex items-center justify-center gap-2.5 shadow-[0_4px_20px_rgba(234,179,8,0.4)] hover:shadow-[0_6px_24px_rgba(234,179,8,0.6)] hover:-translate-y-0.5 transition-all w-full sm:w-auto text-sm tracking-wide"
-            >
-              Download Resume
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-              href="https://wa.me/917558043694"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3.5 rounded-full border border-white/10 bg-white/5 text-textPrimary font-semibold hover:bg-white/10 hover:border-accent transition-all group flex items-center justify-center gap-2.5 w-full sm:w-auto text-sm tracking-wide"
-            >
-              Hire Me <ArrowRight size={16} className="text-accent transition-transform group-hover:translate-x-1" />
-            </motion.a>
-          </div>
-
-          {/* Social Grid */}
-          <motion.div
-            className="flex items-center gap-5 text-textSecondary"
-            initial="hidden"
-            animate="show"
-            variants={{ show: { transition: { staggerChildren: 0.1, delayChildren: 1.1 } } }}
-          >
-            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="https://github.com/agilfaraz532-blip" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
-              <Github size={18} />
-            </motion.a>
-            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="https://linkedin.com/in/agilfaraz" target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
-              <Linkedin size={18} />
-            </motion.a>
-            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="mailto:agilfaraz532@gmail.com" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
-              <Mail size={18} />
-            </motion.a>
-            <motion.a variants={socialItem} whileHover={{ y: -4, rotate: 8, scale: 1.15 }} href="tel:+917558043694" className="p-2.5 rounded-full border border-white/5 bg-white/5 hover:text-accent hover:border-accent/40 hover:shadow-[0_0_18px_rgba(234,179,8,0.35)] transition-colors">
-              <Phone size={18} />
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Right Visual Profile Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
-          transition={{
-            duration: 1,
-            ease: 'easeOut',
-            delay: 0.1,
-            y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1.2 },
-          }}
-          className="lg:col-span-5 flex justify-center items-center z-10"
-        >
-          <div
-            className="relative flex justify-center items-center w-full max-w-[340px] md:max-w-[380px] transition-transform duration-300 ease-out"
-            style={{
-              transform: `perspective(1000px) rotateX(${-tilt.y}deg) rotateY(${tilt.x}deg) translateZ(10px)`,
-            }}
-          >
-            {/* Pulsing card backdrop shadow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary via-accent to-secondaryAccent rounded-[32px] filter blur-[24px] opacity-30 animate-pulse-slow" />
-
-            {/* Rotating gold border */}
-            <div className="gold-ring-mask">
-              <div className="gold-ring" />
-            </div>
-
-            {/* Profile Card Container */}
-            <div className="relative w-full aspect-[4/5] rounded-[30px] overflow-hidden bg-gradient-to-b from-[#17130a] to-[#0a0906] border border-white/10 p-5 shadow-2xl backdrop-blur-xl flex flex-col justify-between">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-[10px] font-mono text-accent tracking-[0.2em] uppercase">DEV.PORTFOLIO: CLOUD_READY</span>
-                <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
-              </div>
-
-              <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-bgDark border border-white/5 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10 z-10" />
-                <div className="absolute inset-0 border-[3px] border-accent/20 rounded-2xl z-20 pointer-events-none" />
-
-                <img
-                  src="images/agil_faraz.jpg"
-                  alt="Agil Faraz"
-                  className="w-full h-full object-cover select-none scale-[1.05] filter brightness-[0.88] contrast-[1.05]"
-                />
-
-                <div className="absolute bottom-3 right-3 bg-bgDark/90 border border-white/15 px-3 py-1 rounded-lg backdrop-blur-md z-20 text-[10px] font-mono font-bold text-accent">
-                  AGIL.DEV // 01
-                </div>
-              </div>
-
-              <div className="mt-4 flex flex-col text-left">
-                <h3 className="text-xl font-bold tracking-wide text-textPrimary leading-none mb-1 font-heading">
-                  Agil Faraz
-                </h3>
-                <div className="text-xs font-mono text-textSecondary flex justify-between items-center">
-                  <span>Python Full Stack</span>
-                  <span className="text-accent font-semibold">UCE Thodupuzha</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div className="planet inset-0" />
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Photo */}
       <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-        onClick={() => scrollToSection('about')}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-textSecondary hover:text-accent transition-colors flex flex-col items-center gap-1.5 text-xs font-mono tracking-widest cursor-pointer select-none z-10"
+        style={{ y: photoY, x: photoX, rotateY: photoTilt }}
+        className="absolute right-0 bottom-0 w-full md:w-[55%] lg:w-[46%] h-[62%] md:h-[88%] pointer-events-none"
       >
-        Scroll Down
-        <ArrowDown size={14} />
+        <img
+          src="images/agil_cinematic-720.webp"
+          srcSet="images/agil_cinematic-420.webp 420w, images/agil_cinematic-720.webp 720w"
+          sizes="(min-width: 768px) 50vw, 100vw"
+          width="720"
+          height="883"
+          alt="Agil Faraz"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-full object-cover object-[50%_20%] opacity-40 md:opacity-90"
+          style={{ maskImage: photoMask, WebkitMaskImage: photoMask, maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
+        />
+      </motion.div>
+
+      {/* Keyword rail */}
+      <motion.ul
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 1 }}
+        className="hidden xl:flex flex-col gap-2 absolute right-10 top-36 border-l border-primary/40 pl-4 font-mono text-[11px] tracking-[0.3em] uppercase text-textSecondary z-10"
+      >
+        {keywords.map((k) => <li key={k}>{k}</li>)}
+      </motion.ul>
+
+      {/* Content */}
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="relative z-10 flex-1 flex items-center max-w-7xl mx-auto px-6 w-full pt-32 pb-10"
+      >
+        <div className="max-w-2xl">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-[11px] font-mono tracking-[0.2em] uppercase text-accent mb-8"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(96,165,250,0.8)]" />
+            Welcome to my portfolio
+          </motion.span>
+
+          <h1
+            className="font-heading font-extrabold tracking-tight leading-[0.92] text-[3.6rem] sm:text-7xl md:text-8xl xl:text-[8.5rem] mb-8"
+            aria-label="Agil Faraz"
+          >
+            <RevealWord text="AGIL" className="text-textPrimary" delay={0.2} />
+            <RevealWord text="FARAZ" className="text-accent-gradient" delay={0.45} />
+          </h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="flex items-center gap-3 text-base md:text-lg text-textPrimary mb-5 h-7 overflow-hidden"
+          >
+            <span className="w-8 h-px bg-primary" />
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={roleIndex}
+                initial={{ y: 24, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -24, opacity: 0 }}
+                transition={{ duration: 0.45, ease }}
+                className="font-medium"
+              >
+                {roles[roleIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.7, ease }}
+            className="text-base md:text-lg text-textSecondary max-w-lg mb-10 leading-relaxed"
+          >
+            I build secure, scalable web applications with Django, React and REST APIs, and deploy them with AWS, Docker and CI/CD.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.7, ease }}
+            className="flex flex-col sm:flex-row gap-4 mb-10"
+          >
+            <MagneticButton
+              href="#projects"
+              onClick={(e) => { e.preventDefault(); scrollToSection('projects') }}
+              className="group btn-glow px-7 py-3.5 rounded-lg bg-primary hover:bg-[#2563EB] text-white font-semibold text-sm flex items-center justify-center gap-2"
+            >
+              View Projects
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </MagneticButton>
+            <MagneticButton
+              href="resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-glow px-7 py-3.5 rounded-lg bg-white/[0.03] text-textPrimary font-semibold text-sm flex items-center justify-center"
+            >
+              Download CV
+            </MagneticButton>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 1.25 } } }}
+            className="flex items-center gap-3"
+          >
+            {socials.map(({ href, icon: Icon, label, external }) => (
+              <motion.a
+                key={label}
+                variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
+                href={href}
+                aria-label={label}
+                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className="w-10 h-10 rounded-lg border border-white/10 bg-white/[0.03] flex items-center justify-center text-textSecondary hover:text-white hover:border-primary/70 hover:shadow-[0_0_18px_-2px_rgba(59,130,246,0.7)] transition-all"
+              >
+                <Icon size={17} />
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Stats bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.4, duration: 0.8, ease }}
+        className="relative z-10 max-w-7xl mx-auto w-full px-6 pb-8"
+      >
+        <div className="flex items-end justify-between gap-6 border-t border-white/10 pt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-10 gap-y-4">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <div className="font-heading text-2xl md:text-3xl font-semibold text-accent">{s.value}</div>
+                <div className="text-[11px] font-mono uppercase tracking-[0.15em] text-textSecondary mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
+          <button
+            onClick={() => scrollToSection('about')}
+            className="hidden sm:flex flex-col items-center gap-2 text-[10px] font-mono uppercase tracking-[0.25em] text-textSecondary hover:text-accent transition-colors shrink-0"
+          >
+            <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center">
+              <motion.span animate={{ y: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
+                <ArrowDown size={15} />
+              </motion.span>
+            </span>
+            Scroll to explore
+          </button>
+        </div>
       </motion.div>
     </section>
   )

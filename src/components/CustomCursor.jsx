@@ -1,73 +1,68 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
+const INTERACTIVE = 'a, button, input, textarea, [role="button"]'
+
+// Dot follows the pointer exactly; the ring trails behind and grows over interactive elements
 export const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [hovered, setHovered] = useState(false)
-  const [hidden, setHidden] = useState(true)
+  const dotRef = useRef(null)
+  const ringRef = useRef(null)
+  const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY })
-      setHidden(false)
-    }
-
-    const handleMouseLeave = () => {
-      setHidden(true)
-    }
-
-    const handleMouseEnter = () => {
-      setHidden(false)
-    }
-
-    // Bind event listeners for interactive element hovers
-    const addHoverListeners = () => {
-      const links = document.querySelectorAll('a, button, .clickable, input, textarea, [role="button"]')
-      links.forEach((link) => {
-        link.addEventListener('mouseenter', () => setHovered(true))
-        link.addEventListener('mouseleave', () => setHovered(false))
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseleave', handleMouseLeave)
-    document.addEventListener('mouseenter', handleMouseEnter)
-    
-    // We run a timeout to attach to dynamically rendered links
-    addHoverListeners()
-    const timer = setTimeout(addHoverListeners, 1500)
-
-    // Apply cursor-none class to body to hide the default browser cursor
+    // Only on devices with a fine pointer (skip touch screens)
+    if (!window.matchMedia('(pointer: fine)').matches) return
+    setEnabled(true)
     document.body.classList.add('custom-cursor-active')
 
+    const pos = { x: -100, y: -100 }
+    const ring = { x: -100, y: -100 }
+    let hovering = false
+    let frameId = null
+
+    const onMove = (e) => {
+      pos.x = e.clientX
+      pos.y = e.clientY
+      hovering = !!e.target.closest?.(INTERACTIVE)
+      if (frameId === null) frameId = requestAnimationFrame(loop)
+    }
+
+    const loop = () => {
+      ring.x += (pos.x - ring.x) * 0.18
+      ring.y += (pos.y - ring.y) * 0.18
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%)`
+      }
+      if (ringRef.current) {
+        const scale = hovering ? 1.8 : 1
+        ringRef.current.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0) translate(-50%, -50%) scale(${scale})`
+        ringRef.current.style.backgroundColor = hovering ? 'rgba(59,130,246,0.12)' : 'transparent'
+        ringRef.current.style.borderColor = hovering ? 'rgba(147,197,253,0.9)' : 'rgba(96,165,250,0.6)'
+      }
+      // Sleep once the ring has caught up; the next mousemove wakes it
+      const settled = Math.abs(pos.x - ring.x) < 0.1 && Math.abs(pos.y - ring.y) < 0.1
+      frameId = settled ? null : requestAnimationFrame(loop)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      document.removeEventListener('mouseenter', handleMouseEnter)
-      clearTimeout(timer)
+      window.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(frameId)
       document.body.classList.remove('custom-cursor-active')
     }
   }, [])
 
-  if (hidden) return null
+  if (!enabled) return null
 
   return (
     <>
-      {/* Inner Dot */}
       <div
-        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[99999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-75"
-        style={{ left: `${position.x}px`, top: `${position.y}px` }}
+        ref={dotRef}
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-accent pointer-events-none z-[99999] shadow-[0_0_10px_2px_rgba(96,165,250,0.9)]"
       />
-      {/* Outer Ring */}
       <div
-        className={`fixed top-0 left-0 border-2 border-primary rounded-full pointer-events-none z-[99998] -translate-x-1/2 -translate-y-1/2 transition-[width,height,background-color,border-color] duration-300 ease-out`}
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          width: hovered ? '56px' : '28px',
-          height: hovered ? '56px' : '28px',
-          backgroundColor: hovered ? 'rgba(234, 179, 8, 0.12)' : 'transparent',
-          borderColor: hovered ? '#FDE68A' : '#EAB308',
-        }}
+        ref={ringRef}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border pointer-events-none z-[99998] transition-[background-color,border-color,scale] duration-300 shadow-[0_0_16px_-2px_rgba(59,130,246,0.6)]"
       />
     </>
   )
