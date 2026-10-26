@@ -16,14 +16,14 @@ export const Projects = () => {
       badge: 'DevOps & AI',
       image: 'images/k8pulse',
       tags: ['FastAPI', 'React + TS', 'Kubernetes', 'Prometheus', 'Grafana', 'Ollama'],
-      shortDesc: 'Full-stack Kubernetes observability dashboard with a live alert engine and an AI SRE copilot that explains incidents.',
-      problem: 'Cluster problems like CrashLoopBackOff pods, memory pressure or NotReady nodes are scattered across kubectl output, metrics and logs, which slows down diagnosis.',
-      solution: 'Built a FastAPI backend that reads the cluster live through the Kubernetes API and metrics-server, stores history in Prometheus, evaluates alert rules, and streams AI analysis from a local Ollama model with Gemini as a fallback, all behind a React dashboard.',
+      shortDesc: 'Self-hosted Kubernetes dashboard with live metrics, self-resolving alerts and a private AI SRE copilot that diagnoses failing pods using a local LLM.',
+      problem: 'When a pod crash-loops, the evidence is scattered across kubectl output, metrics, events and the logs of a container that already died, which slows down every incident.',
+      solution: 'Built a FastAPI backend that reads the cluster live through the Kubernetes API and metrics-server, keeps history in Prometheus and evaluates alert rules every 30 seconds. A React dashboard brings it together, and an AI copilot feeds the status, exit reason and crashed-run logs of the failing pod to a local Ollama model (Gemini fallback) to explain the root cause.',
       features: [
-        'Live inventory of nodes, pods, deployments, services, namespaces and events.',
-        'Alert engine for CPU, memory, failing pods, restarts and NotReady nodes, with hold times and auto-resolve.',
-        'AI SRE copilot streaming cluster or per-pod analysis (Ollama first, Gemini fallback).',
-        'Pod log viewer with search, auto-provisioned Grafana dashboards and JWT authentication.'
+        'Pod status that matches kubectl (CrashLoopBackOff, Error, OOMKilled) with exit codes and crashed-run logs.',
+        'Alert engine for CPU, memory, crash loops, restarts and NotReady nodes, with hold times and auto-resolve.',
+        'Private AI SRE copilot: one-click diagnosis of failing pods, streamed live from a local model.',
+        'Ctrl+K search across the cluster, Grafana dashboards, JWT auth and a responsive UI.'
       ],
       techStack: 'Python, FastAPI, SQLAlchemy, PostgreSQL, Kubernetes client, Prometheus, Grafana, React, TypeScript, Recharts, Docker Compose, nginx',
       github: 'https://github.com/agilfaraz532-blip/k8pulse',
