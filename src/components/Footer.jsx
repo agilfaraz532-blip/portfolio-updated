@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail, Phone, MapPin, MessageSquare, ArrowRight, ArrowUp } from 'lucide-react'
 import MagneticButton from './MagneticButton'
+import FlyIn from './FlyIn'
 
 const contacts = [
   { icon: Mail, label: 'agilfaraz532@gmail.com', href: 'mailto:agilfaraz532@gmail.com' },
@@ -19,13 +20,7 @@ export const Footer = () => {
   return (
     <footer id="contact" className="relative pt-32 pb-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.9, ease }}
-          className="relative rounded-3xl border border-white/[0.08] bg-gradient-to-br from-surface via-bgDark to-bgDark overflow-hidden"
-        >
+        <FlyIn from="center" className="relative rounded-3xl red-glass overflow-hidden">
           {/* Planet in the corner */}
           <div className="absolute -right-56 -bottom-72 md:-right-80 md:-bottom-80 w-[460px] md:w-[620px] aspect-square pointer-events-none opacity-70 md:opacity-100">
             <div className="planet inset-0 rotate-[-35deg]" />
@@ -34,12 +29,12 @@ export const Footer = () => {
 
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 md:p-14">
             <div>
-              <div className="flex items-center gap-3 mb-5 font-mono text-[11px] tracking-[0.3em] uppercase text-accent">
-                <span className="w-6 h-px bg-accent" /> Contact
+              <div className="flex items-center gap-3 mb-5 font-mono text-[11px] tracking-[0.3em] uppercase text-white/80">
+                <span className="w-6 h-px bg-white/70" /> Contact
               </div>
-              <h2 className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-textPrimary leading-[1.05] mb-6">
+              <h2 className="font-heading text-4xl md:text-6xl font-extrabold uppercase tracking-tight text-textPrimary text-glow leading-[1.02] mb-6">
                 Let's Build <br />
-                <span className="text-accent-gradient">Something Great</span>
+                Something Great<span className="text-primary">.</span>
               </h2>
               <p className="text-textSecondary leading-relaxed max-w-md mb-10">
                 I'm always open to discussing new projects, internships, full-time roles or just a good tech conversation.
@@ -47,7 +42,7 @@ export const Footer = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <MagneticButton
                   href="mailto:agilfaraz532@gmail.com"
-                  className="group btn-glow px-7 py-3.5 rounded-lg bg-primary hover:bg-[#2563EB] text-white font-semibold text-sm inline-flex items-center justify-center gap-2"
+                  className="group px-7 py-3.5 rounded-full bg-white hover:bg-white/90 text-[#B3121C] font-bold text-xs uppercase tracking-[0.16em] inline-flex items-center justify-center gap-2"
                 >
                   Send a Message
                   <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -56,7 +51,7 @@ export const Footer = () => {
                   href="https://wa.me/917558043694"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-outline-glow px-7 py-3.5 rounded-lg bg-white/[0.03] text-textPrimary font-semibold text-sm inline-flex items-center justify-center gap-2"
+                  className="btn-outline-glow px-7 py-3.5 rounded-full bg-black/25 text-textPrimary font-bold text-xs uppercase tracking-[0.16em] inline-flex items-center justify-center gap-2"
                 >
                   <MessageSquare size={16} /> WhatsApp
                 </MagneticButton>
@@ -73,7 +68,7 @@ export const Footer = () => {
               {contacts.map(({ icon: Icon, label, href, external }) => {
                 const inner = (
                   <>
-                    <span className="w-10 h-10 rounded-lg border border-white/10 bg-bgDark/60 flex items-center justify-center text-accent shrink-0 transition-shadow group-hover:shadow-[0_0_18px_-2px_rgba(59,130,246,0.8)]">
+                    <span className="w-10 h-10 rounded-lg border border-white/10 bg-bgDark/60 flex items-center justify-center text-white shrink-0 transition-shadow group-hover:shadow-[0_0_18px_-2px_rgba(229,25,36,0.8)]">
                       <Icon size={17} />
                     </span>
                     <span className="text-sm text-textPrimary/90 group-hover:text-white transition-colors break-all">{label}</span>
@@ -93,10 +88,10 @@ export const Footer = () => {
               })}
             </motion.ul>
           </div>
-        </motion.div>
+        </FlyIn>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-textSecondary/60">
-          <span className="font-heading font-extrabold text-base text-accent-gradient">AF</span>
+          <span className="font-heading font-extrabold text-sm uppercase tracking-[0.18em] text-textPrimary">Agil<span className="text-primary">.</span></span>
           <span>&copy; 2026 Agil Faraz. All rights reserved.</span>
           <button
             onClick={scrollToTop}

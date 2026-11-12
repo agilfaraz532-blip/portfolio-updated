@@ -56,14 +56,14 @@ export const Research = () => {
   return (
     <section id="research" className="relative py-32 overflow-hidden">
       <div className="max-w-5xl mx-auto px-5 sm:px-6">
-        <SectionHeader index="04" label="Experience & education" title="My Journey" />
+        <SectionHeader label="Experience & education" title="My Journey" />
 
         <div ref={listRef} className="relative">
           {/* Track + progress line that fills as you scroll */}
           <div className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-2 bottom-2 w-px bg-white/10" />
           <motion.div
             style={{ scaleY: lineScale }}
-            className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-accent via-primary to-primary/0 shadow-[0_0_10px_rgba(59,130,246,0.8)]"
+            className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-accent via-primary to-primary/0 shadow-[0_0_10px_rgba(229,25,36,0.8)]"
           />
 
           <div className="flex flex-col gap-10">
@@ -81,7 +81,7 @@ export const Research = () => {
                 </div>
 
                 {/* Node */}
-                <span className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-1.5 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-accent bg-bgDark shadow-[0_0_12px_2px_rgba(59,130,246,0.6)]">
+                <span className="absolute left-[7px] sm:left-[88px] md:left-[120px] top-1.5 -translate-x-1/2 w-4 h-4 rounded-full border-2 border-accent bg-bgDark shadow-[0_0_12px_2px_rgba(229,25,36,0.6)]">
                   <span className="absolute inset-1 rounded-full bg-accent" />
                 </span>
 

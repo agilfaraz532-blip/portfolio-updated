@@ -33,7 +33,7 @@ function App() {
 
       <div className="relative min-h-screen">
         <motion.div
-          className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2563EB] via-primary to-accent z-[9999] origin-left"
+          className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#B3121C] via-primary to-accent z-[9999] origin-left"
           style={{ scaleX }}
         />
 

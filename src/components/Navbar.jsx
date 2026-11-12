@@ -52,28 +52,31 @@ export const Navbar = () => {
   }
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? 'bg-bgDark/90 lg:bg-bgDark/70 lg:backdrop-blur-lg border-b border-white/[0.06] py-3' : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full z-50 px-4 pt-4 md:pt-5 pointer-events-none">
+      {/* Floating pill */}
+      <div
+        className={`pointer-events-auto max-w-5xl mx-auto flex justify-between items-center rounded-full border pl-6 pr-2.5 py-2 transition-all duration-500 ${
+          scrolled || isOpen
+            ? 'bg-[#120A0B]/90 lg:bg-[#120A0B]/70 lg:backdrop-blur-lg border-white/10 shadow-[0_10px_40px_-10px_rgba(229,25,36,0.45)]'
+            : 'bg-white/[0.04] border-white/[0.08]'
+        }`}
+      >
         <a
           href="#home"
           onClick={(e) => { e.preventDefault(); scrollToSection('home') }}
-          className="font-heading text-2xl font-extrabold tracking-tight text-accent-gradient"
+          className="font-heading text-sm font-extrabold uppercase tracking-[0.18em] text-textPrimary text-glow"
           aria-label="Agil Faraz home"
         >
-          AF
+          Agil<span className="text-primary">.</span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center">
           {navLinks.map((link) => (
             <a
               key={link.id}
               href={`#${link.id}`}
               onClick={(e) => { e.preventDefault(); scrollToSection(link.id) }}
-              className={`relative px-4 py-2 text-[13px] font-medium transition-colors ${
+              className={`relative px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] transition-colors ${
                 activeSection === link.id ? 'text-white' : 'text-textSecondary hover:text-white'
               }`}
             >
@@ -81,7 +84,7 @@ export const Navbar = () => {
               {activeSection === link.id && (
                 <motion.span
                   layoutId="navDot"
-                  className="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-1 h-1 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(96,165,250,0.9)]"
+                  className="absolute left-3.5 right-3.5 bottom-0.5 h-[2px] rounded-full bg-primary shadow-[0_0_10px_2px_rgba(229,25,36,0.9)]"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
               )}
@@ -92,30 +95,30 @@ export const Navbar = () => {
         <a
           href="#contact"
           onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}
-          className="hidden lg:inline-flex btn-outline-glow px-5 py-2 rounded-lg border-primary/60 text-sm font-semibold text-white"
+          className="hidden lg:inline-flex btn-glow px-5 py-2 rounded-full bg-primary hover:bg-[#B3121C] text-[11px] font-bold uppercase tracking-[0.16em] text-white"
         >
           Let's Talk
         </a>
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden w-10 h-10 rounded-lg border border-white/10 text-textPrimary flex items-center justify-center"
+          className="lg:hidden w-9 h-9 rounded-full border border-white/10 text-textPrimary flex items-center justify-center"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          {isOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden bg-bgDark/[0.97] border-b border-white/[0.06]"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="pointer-events-auto lg:hidden max-w-5xl mx-auto mt-2 rounded-3xl overflow-hidden bg-[#120A0B]/[0.97] border border-white/10"
           >
-            <div className="px-6 py-6 flex flex-col">
+            <div className="px-6 py-4 flex flex-col">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.id}
@@ -124,7 +127,7 @@ export const Navbar = () => {
                   transition={{ delay: i * 0.04 }}
                   href={`#${link.id}`}
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.id) }}
-                  className={`flex items-center justify-between py-3 border-b border-white/[0.05] font-heading text-lg ${
+                  className={`flex items-center justify-between py-3 border-b border-white/[0.05] last:border-0 font-heading text-base uppercase tracking-wider ${
                     activeSection === link.id ? 'text-accent' : 'text-textPrimary'
                   }`}
                 >

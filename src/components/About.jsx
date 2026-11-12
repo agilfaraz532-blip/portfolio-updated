@@ -3,6 +3,7 @@ import { motion, useInView, animate } from 'framer-motion'
 import { Cloud, Code2, Database, Users, Terminal, Lightbulb, UsersRound, MapPin } from 'lucide-react'
 import SectionHeader from './SectionHeader'
 import SpotlightCard from './SpotlightCard'
+import FlyIn from './FlyIn'
 
 const stats = [
   { value: 6, suffix: '', label: 'Projects' },
@@ -43,23 +44,17 @@ export const About = () => {
   return (
     <section id="about" className="relative py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionHeader index="01" label="About me" title="Developer with a security mindset" />
+        <SectionHeader label="Who I am" title="About Agil" description="A developer with a security mindset." />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* Photo */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, ease }}
-            className="lg:col-span-5"
-          >
-            <div className="relative group">
+          <FlyIn from="left" outerClassName="lg:col-span-5">
+            <div className="relative group lg:rotate-[-3deg] transition-transform duration-700 hover:rotate-0">
               <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-primary/60 via-primary/10 to-transparent" />
               <div className="relative rounded-2xl overflow-hidden bg-surface aspect-[4/5]">
                 <img
-                  src="images/agil_cinematic-720.webp"
-                  srcSet="images/agil_cinematic-420.webp 420w, images/agil_cinematic-720.webp 720w"
+                  src="images/agil_red-720.webp"
+                  srcSet="images/agil_red-420.webp 420w, images/agil_red-720.webp 720w"
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   width="720"
                   height="883"
@@ -82,7 +77,7 @@ export const About = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </FlyIn>
 
           {/* Text */}
           <div className="lg:col-span-7">
@@ -106,14 +101,14 @@ export const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease, delay: 0.1 }}
-              className="grid grid-cols-3 rounded-xl border border-white/10 bg-white/[0.02] divide-x divide-white/10 mb-6"
+              className="grid grid-cols-3 rounded-2xl red-glass divide-x divide-white/15 mb-6"
             >
               {stats.map((s) => (
                 <div key={s.label} className="px-4 py-5 text-center">
-                  <div className="font-heading text-3xl md:text-4xl font-semibold text-accent">
+                  <div className="font-heading text-3xl md:text-4xl font-extrabold text-white text-glow">
                     <CountUp to={s.value} suffix={s.suffix} />
                   </div>
-                  <div className="text-[11px] uppercase tracking-[0.15em] text-textSecondary mt-1">{s.label}</div>
+                  <div className="text-[11px] uppercase tracking-[0.15em] text-white/70 mt-1">{s.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -148,7 +143,7 @@ export const About = () => {
                   transition={{ duration: 0.6, ease, delay: i * 0.08 }}
                 >
                   <SpotlightCard className="h-full p-5 flex gap-4 items-start">
-                    <div className="w-10 h-10 shrink-0 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-accent transition-shadow duration-500 group-hover:shadow-[0_0_20px_-2px_rgba(59,130,246,0.8)]">
+                    <div className="w-10 h-10 shrink-0 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-accent transition-shadow duration-500 group-hover:shadow-[0_0_20px_-2px_rgba(229,25,36,0.8)]">
                       <Icon size={18} />
                     </div>
                     <div>

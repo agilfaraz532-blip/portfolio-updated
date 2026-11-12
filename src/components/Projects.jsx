@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Github, ExternalLink, Plus, Minus, ArrowUpRight } from 'lucide-react'
 import SectionHeader from './SectionHeader'
+import FlyIn from './FlyIn'
 
 export const Projects = () => {
   const [filter, setFilter] = useState('all')
@@ -152,28 +153,27 @@ export const Projects = () => {
       <div className="glow-orb top-[15%] right-[-10%] w-[500px] h-[500px] -z-10" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-4">
+        <div className="flex flex-col items-center mb-4">
           <SectionHeader
-            index="03"
             label="Selected work"
-            title="Featured Projects"
+            title="Projects"
             description="From Kubernetes observability to deep-learning diagnostics and production web apps."
           />
 
           {/* Category filter */}
-          <div className="flex flex-wrap gap-2 mb-16">
+          <div className="flex flex-wrap justify-center gap-2 mb-14 -mt-4">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => { setFilter(cat.id); setExpandedId(null) }}
-                className={`relative px-4 py-2 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
+                className={`relative px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.14em] transition-colors ${
                   filter === cat.id ? 'text-white' : 'text-textSecondary hover:text-white border border-white/10'
                 }`}
               >
                 {filter === cat.id && (
                   <motion.span
                     layoutId="projectFilter"
-                    className="absolute inset-0 rounded-lg bg-primary shadow-[0_0_20px_-4px_rgba(59,130,246,0.9)]"
+                    className="absolute inset-0 rounded-full bg-primary shadow-[0_0_20px_-4px_rgba(229,25,36,0.9)]"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -192,14 +192,16 @@ export const Projects = () => {
                 <motion.article
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.6, ease, delay: i * 0.05 }}
-                  className={`group relative rounded-2xl overflow-hidden border border-white/[0.08] bg-surface/60 transition-[border-color,box-shadow] duration-500 hover:border-primary/50 hover:shadow-[0_30px_60px_-20px_rgba(59,130,246,0.45)] ${
-                    featured ? 'md:col-span-2' : ''
-                  }`}
+                  transition={{ duration: 0.4, ease }}
+                  className={featured ? 'md:col-span-2' : ''}
                 >
+                  <FlyIn
+                    from={featured ? 'center' : i % 2 ? 'left' : 'right'}
+                    className="group relative h-full rounded-2xl overflow-hidden border border-white/[0.08] bg-surface/60 transition-[border-color,box-shadow] duration-500 hover:border-primary/50 hover:shadow-[0_30px_60px_-20px_rgba(229,25,36,0.45)]"
+                  >
                   {/* Image with title overlay */}
                   <div className={`relative overflow-hidden ${featured ? 'aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]' : 'aspect-[4/3] sm:aspect-[16/10]'}`}>
                     <img
@@ -319,6 +321,7 @@ export const Projects = () => {
                       )}
                     </AnimatePresence>
                   </div>
+                  </FlyIn>
                 </motion.article>
               )
             })}
@@ -330,7 +333,7 @@ export const Projects = () => {
             href={githubProfile}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline-glow inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-textPrimary"
+            className="btn-outline-glow inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.16em] text-textPrimary"
           >
             <Github size={16} /> More on GitHub
           </a>

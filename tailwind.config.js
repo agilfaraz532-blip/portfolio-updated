@@ -8,13 +8,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        bgDark: "#05070D",
-        surface: "#0B1120",
-        primary: "#3B82F6",
-        accent: "#60A5FA",
-        secondaryAccent: "#22D3EE",
-        textPrimary: "#F1F5F9",
-        textSecondary: "#94A3B8",
+        bgDark: "#0A0A0C",
+        surface: "#150C0E",
+        primary: "#E51924",
+        accent: "#FF4D4D",
+        secondaryAccent: "#FF8A3D",
+        textPrimary: "#F6F1F1",
+        textSecondary: "#A99EA0",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

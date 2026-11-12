@@ -67,7 +67,6 @@ export const Skills = () => {
 
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
-          index="02"
           label="Expertise"
           title="My Skills"
           description="Technologies and tools I use to design, build, ship and monitor software."
@@ -102,9 +101,9 @@ export const Skills = () => {
                       show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease } },
                     }}
                     whileHover={{ y: -6 }}
-                    className="group relative aspect-square rounded-xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.01] flex flex-col items-center justify-center gap-3 transition-[border-color,box-shadow] duration-300 hover:border-primary/60 hover:shadow-[0_0_30px_-6px_rgba(59,130,246,0.7)]"
+                    className="group relative aspect-square rounded-xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-white/[0.01] flex flex-col items-center justify-center gap-3 transition-[border-color,box-shadow] duration-300 hover:border-primary/60 hover:shadow-[0_0_30px_-6px_rgba(229,25,36,0.7)]"
                   >
-                    <Icon className="text-2xl md:text-[1.75rem] text-textSecondary transition-all duration-300 group-hover:text-accent group-hover:drop-shadow-[0_0_10px_rgba(96,165,250,0.9)]" />
+                    <Icon className="text-2xl md:text-[1.75rem] text-textSecondary transition-all duration-300 group-hover:text-accent group-hover:drop-shadow-[0_0_10px_rgba(255,77,77,0.9)]" />
                     <span className="text-[11px] md:text-xs text-textSecondary group-hover:text-textPrimary transition-colors text-center px-1">
                       {name}
                     </span>
